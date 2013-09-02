@@ -1,0 +1,39 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <LinearLayout
+        android:id="@+id/btn_drawer_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawer_menu_btn"
+        android:orientation="vertical" >
+
+        <TextView
+            style="@style/DrawerMenuButton"
+            android:text="@string/drawer_photo" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_drawer_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawer_menu_btn"
+        android:orientation="vertical" >
+
+        <TextView
+            style="@style/DrawerMenuButton"
+            android:text="@string/drawer_notice" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_drawer_set"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawer_menu_btn"
+        android:orientation="vertical" >
+
+        <TextView
+            style="@style/DrawerMenuButton"
+            android:text="@string/drawer_set" />
+    </LinearLayout>
+
+</merge>

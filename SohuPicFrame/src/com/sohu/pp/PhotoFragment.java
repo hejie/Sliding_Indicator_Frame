@@ -1,12 +1,14 @@
 package com.sohu.pp;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.SparseArray;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +21,26 @@ import com.viewpagerindicator.TabPageIndicator;
 
 public class PhotoFragment extends Fragment {
 
-	private static final String[] CONTENT = new String[] { "时间", "地点", "相册" };
+	private String[] photoTabs = null;
+	private SparseArray<Fragment> photoTabFragments = new SparseArray<Fragment>();
 
-	private ImageView toggle;
+	private ImageView toggle = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
+
+		initResource();
+	}
+
+	private void initResource() {
+		Resources res = getResources();
+		photoTabs = res.getStringArray(R.array.photo_tab_array);
+
+		photoTabFragments.append(0, new PhotoTimeFragment());
+		photoTabFragments.append(1, TestFragment.newInstance(photoTabs[1]));
+		photoTabFragments.append(2, TestFragment.newInstance(photoTabs[2]));
 	}
 
 	@Override
@@ -50,8 +64,8 @@ public class PhotoFragment extends Fragment {
 			}
 		});
 
-		FragmentPagerAdapter adapter = new GoogleMusicAdapter(getActivity()
-				.getSupportFragmentManager());
+		FragmentPagerAdapter adapter = new PhotoFragmentPagerAdapter(
+				getActivity().getSupportFragmentManager());
 
 		ViewPager pager = (ViewPager) view.findViewById(R.id.pager);
 		pager.setAdapter(adapter);
@@ -93,25 +107,25 @@ public class PhotoFragment extends Fragment {
 	public void showMsg(String msg) {
 	}
 
-	class GoogleMusicAdapter extends FragmentPagerAdapter {
+	private class PhotoFragmentPagerAdapter extends FragmentPagerAdapter {
 
-		public GoogleMusicAdapter(FragmentManager fm) {
+		public PhotoFragmentPagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
 
 		@Override
 		public Fragment getItem(int position) {
-			return TestFragment.newInstance(CONTENT[position % CONTENT.length]);
+			return photoTabFragments.get(position);
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return CONTENT[position % CONTENT.length];
+			return photoTabs[position % photoTabs.length];
 		}
 
 		@Override
 		public int getCount() {
-			return CONTENT.length;
+			return photoTabs.length;
 		}
 
 	}

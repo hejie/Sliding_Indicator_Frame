@@ -35,7 +35,7 @@ public class LeftMenuFragment extends Fragment {
 		// TODO Auto-generated method stub
 		// return super.onCreateView(inflater, container, savedInstanceState);
 
-		View view = inflater.inflate(R.layout.sliding_drawer_contents, null);
+		View view = inflater.inflate(R.layout.sliding_drawer_content, null);
 
 		layout = new LeftMenuLayout();
 		layout.photo = (LinearLayout) view.findViewById(R.id.btn_drawer_photo);

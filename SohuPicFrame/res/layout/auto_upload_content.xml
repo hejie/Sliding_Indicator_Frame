@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ProgressWheel="http://schemas.android.com/apk/res/com.sohu.pp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <com.sohu.pp.ProgressWheel
+            android:id="@+id/photo_notice_progress"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            ProgressWheel:barColor="#FF0000FF"
+            ProgressWheel:barLength="150dp"
+            ProgressWheel:barWidth="15dp"
+            ProgressWheel:circleColor="#00FFFFFF"
+            ProgressWheel:rimColor="#00FFFFFF"
+            ProgressWheel:rimWidth="15dp"
+            ProgressWheel:spinSpeed="-2dp"
+            ProgressWheel:text="200"
+            ProgressWheel:textColor="#FF222222"
+            ProgressWheel:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/photo_upload_notice"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/photo_auto_upload" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/photo_manual_upload" />
+    </LinearLayout>
+
+</LinearLayout>

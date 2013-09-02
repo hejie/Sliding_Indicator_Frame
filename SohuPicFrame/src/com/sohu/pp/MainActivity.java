@@ -1,13 +1,18 @@
 package com.sohu.pp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+
+import de.greenrobot.event.EventBus;
 
 public class MainActivity extends SlidingFragmentActivity {
 
@@ -41,15 +46,47 @@ public class MainActivity extends SlidingFragmentActivity {
 		sm.setShadowDrawable(R.drawable.drawer_menu_shadow);
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setFadeDegree(0.35f);
+
+		sm.setOnClosedListener(new SlidingMenu.OnClosedListener() {
+			@Override
+			public void onClosed() {
+				LocalBroadcastManager
+						.getInstance(MainActivity.this)
+						.sendBroadcast(
+								new Intent(
+										AppEventAction.SLIDING_MENU_CLOSED_BROADCAST));
+				System.out.println("Closed LocalBroadcast");
+
+				EventBus.getDefault().post(new SlidingMenuEvent("Closed"));
+				System.out.println("Closed EventBus");
+			}
+		});
+
+		sm.setOnOpenedListener(new OnOpenedListener() {
+
+			@Override
+			public void onOpened() {
+				// TODO Auto-generated method stub
+				LocalBroadcastManager
+						.getInstance(MainActivity.this)
+						.sendBroadcast(
+								new Intent(
+										AppEventAction.SLIDING_MENU_OPENED_BROADCAST));
+				System.out.println("Opened LocalBroadcast");
+
+				EventBus.getDefault().post(new SlidingMenuEvent("Opened"));
+				System.out.println("Opened EventBus");
+			}
+		});
 	}
 
 	private void initLeftFragments() {
 		FragmentTransaction fragmentTransaction = getSupportFragmentManager()
 				.beginTransaction();
-		
+
 		fragmentTransaction.replace(R.id.menu, getLeftMenuFragment(),
 				LeftMenuFragment.class.getName());
-		
+
 		fragmentTransaction.commit();
 	}
 

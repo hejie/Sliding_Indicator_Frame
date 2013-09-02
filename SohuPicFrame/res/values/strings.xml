@@ -10,5 +10,9 @@
     
     <string name="photo_toggle">相册-菜单按钮</string>
     <string name="photo_upload">相册-上传按钮</string>
-
+    
+    <string name="photo_auto_upload">开启自动上传</string>
+    <string name="photo_manual_upload">手动上传</string>
+    <string name="photo_upload_notice">张图片没有备份</string>
+    
 </resources>
